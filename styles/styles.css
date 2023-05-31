@@ -1,0 +1,59 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-top: 0;
+  }
+  
+  /* Estilos para la factura */
+  .factura {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .factura h2 {
+    margin-top: 0;
+    text-align: center;
+  }
+  
+  .factura .cliente {
+    margin-bottom: 20px;
+  }
+  
+  .factura .cliente p {
+    margin: 0;
+  }
+  
+  .factura .detalles {
+    margin-bottom: 20px;
+  }
+  
+  .factura .detalles table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .factura .detalles th,
+  .factura .detalles td {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .factura .total {
+    text-align: right;
+    font-weight: bold;
+  }
+  
