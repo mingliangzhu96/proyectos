@@ -1,9 +1,18 @@
 import Image from 'next/image'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['greek-ext'] })
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleNavigate = (path: string) => {
+    router.push(path);
+  };
+
+  
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -31,18 +40,54 @@ export default function Home() {
       </div>
 
       <div >
-        <p style={{ fontSize: '58px', fontWeight: 'bOLD' }}>发票</p>
+        <p style={{ fontSize: '58px', fontWeight: 'bold' }}>发票</p>
       </div>
 
       <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
+
+        <a onClick={() => handleNavigate('/invoiceForProduct')}
+         className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+         target="_blank"
+         rel="noopener noreferrer"
+        >         
+            <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
+              产品类型的发票{' '}
+              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+                -&gt;
+              </span>
+            </h2>
+            <p
+              className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
+            >            
+              产品发票是一种商业文件，用于记录销售产品或提供服务的交易细节。它是卖方向买方提供的一种证明，确认了交易的发生以及所涉及的产品或服务的详细信息。发票通常包含以下重要信息：
+            </p>          
+        </a>
+
+        <a onClick={() => handleNavigate('/invoiceForRepair')}
+          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          target="_blank"
+          rel="noopener noreferrer">
+            
+            <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
+              维修类型的发票{' '}
+              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+                -&gt;
+              </span>
+            </h2>
+            <p
+              className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
+            >
+              维修类型的发票是用于记录维修服务或修理工作的商业文件。它提供了维修服务的详细信息，包括维修项目、维修时间、工时费用、所用零部件以及其他相关费用。维修发票通常包含以下要素
+            </p>
+        </a>
+
+        <a onClick={() => handleNavigate('/invoiceForUnas')}
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           target="_blank"
           rel="noopener noreferrer"
         >
           <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            糖果店发票{' '}
+            美甲类型的发票{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
@@ -50,18 +95,17 @@ export default function Home() {
           <p
             className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
           >
-            Find in-depth information about Next.js features and API.
+            美甲发票是指美甲服务提供商向客户提供的结算凭证，用于记录美甲服务的费用和相关信息。美甲发票在商业交易中具有重要的法律和财务意义，既是服务提供商的收入凭证，也是客户的支出凭证。
           </p>
         </a>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
+        <a onClick={() => handleNavigate('/invoiceForServices')}
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           target="_blank"
           rel="noopener noreferrer"
         >
           <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            手机店发票{' '}
+            服务类型的发票{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
@@ -69,46 +113,7 @@ export default function Home() {
           <p
             className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
           >
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            美甲发票{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p
-            className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
-          >
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            百元发票{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p
-            className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
-          >
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
+          服务发票是指服务提供商向客户提供的结算凭证，用于记录提供的服务费用和相关信息          </p>
         </a>
       </div>
     </main>
