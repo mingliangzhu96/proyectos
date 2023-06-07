@@ -1,0 +1,16 @@
+.input-futuristic {
+  width: 180px;
+  box-sizing: border-box;
+  padding: 4px 8px;
+  font-size: 13px;
+  border: none;
+  background-color: #f8f8f8; /* Color de fondo más claro */
+  color: #333;
+  outline: none;
+  transition: background-color 0.3s;
+}
+
+.input-futuristic:focus {
+  border: 2px solid #333;
+  background-color: #fff;
+}
