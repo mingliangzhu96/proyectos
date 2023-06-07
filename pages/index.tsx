@@ -49,6 +49,7 @@ export default function Home() {
          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
          target="_blank"
          rel="noopener noreferrer"
+         title="Haz clic aquí para explorar los tipos de facturas de productos"
         >         
             <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
               产品类型的发票{' '}
@@ -66,7 +67,9 @@ export default function Home() {
         <a onClick={() => handleNavigate('/invoiceForRepair')}
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           target="_blank"
-          rel="noopener noreferrer">
+          rel="noopener noreferrer"
+          title="Haz clic aquí para explorar los tipos de facturas de reparación"
+          >
             
             <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
               维修类型的发票{' '}
@@ -86,7 +89,9 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
+          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}
+            title="Haz clic aquí para explorar los tipos de facturas de uñas"
+            >
             美甲类型的发票{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
@@ -104,7 +109,9 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
+          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}
+            title="Haz clic aquí para explorar los tipos de facturas de servicios"
+            >
             服务类型的发票{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
