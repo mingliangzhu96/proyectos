@@ -1,4 +1,5 @@
 import os
+import re 
 import time
 import requests
 from bs4 import BeautifulSoup
@@ -17,7 +18,7 @@ chrome_options.add_argument("--headless")  # Ejecutar en modo sin cabeza
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
 
 # URL del producto de Amazon
-url = 'https://www.amazon.es/dp/B0CYLL7X9V'
+url = input('Introduce la URL del producto de Amazon: ')
 driver.get(url)
 
 # Esperar hasta que el título del producto esté presente
@@ -39,18 +40,18 @@ driver.quit()
 # Analizar el contenido HTML con BeautifulSoup
 soup = BeautifulSoup(html_content, 'html.parser')
 
-# Guardar el contenido de BeautifulSoup en un archivo HTML para depuración
+""" # Guardar el contenido de BeautifulSoup en un archivo HTML para depuración
 with open('pagina.html', 'w', encoding='utf-8') as file:
     file.write(soup.prettify())
-
 print("El contenido HTML ha sido guardado en 'pagina.html' para depuración.") 
+ """
 
 # Extraer el título del producto y limpiar caracteres no válidos para nombres de carpetas
 title_element = soup.find('span', {'id': 'productTitle'})
 title = title_element.get_text(strip=True) if title_element else 'Sin Título'
 
 # Limpiar caracteres no válidos para nombres de archivos en Windows
-invalid_chars = '<>:"/\\|?*'
+invalid_chars = '<>:"/\\|?* '
 safe_title = "".join(c for c in title if c not in invalid_chars).strip()
 
 # Limitar la longitud del nombre de la carpeta para evitar problemas de longitud máxima de ruta en Windows
@@ -60,14 +61,15 @@ safe_title = safe_title[:12]  # Limita el título a los primeros 100 caracteres
 image_dir = os.path.join('productos', safe_title)
 os.makedirs(image_dir, exist_ok=True)
 
-# Buscar todas las imágenes en la página usando 'img' tag y 'data-old-hires'
-img_elements = soup.find_all('img', {'src': True})
+# Buscar todas las li de la página con class 'a-spacing-small item imageThumbnail a-declarative'
+list_items = soup.find_all('li', class_='a-spacing-small item imageThumbnail a-declarative')
 
-if not img_elements:
-    print("No se encontraron imágenes con los selectores actuales.")
+if not list_items:
+    print("No se encontraron ningun li.")
 
-# Filtramos y descargamos las imágenes encontradas, priorizando las de alta resolución (data-old-hires)
-for index, img_element in enumerate(img_elements):
+for index, list_item in enumerate(list_items):
+    img_element = list_item.find('img', src=True)
+
     # Priorizar 'data-old-hires' si está disponible, de lo contrario usar 'src'
     img_url = img_element.get('data-old-hires') or img_element.get('src')
 
@@ -83,15 +85,16 @@ for index, img_element in enumerate(img_elements):
     # Descargar la imagen y guardarla en el directorio especificado
     try:
         # Modificar el sufijo para obtener una imagen de 522x522 píxeles
-        img_url_high_res = img_url.replace('._AC_US40_', '._AC_SX522_')
+        pattern = r'\._.*?_\.'
+        img_url_high_res = re.sub(pattern, '._AC_SL1500_.', img_url)
         img_response = requests.get(img_url_high_res)
         img_response.raise_for_status()  # Lanza un error si la solicitud de la imagen falló
-        
+        print(f"Imagen guardada: {img_url_high_res}")
+
         # Guardar la imagen en el directorio
         img_filename = os.path.join(image_dir, f'{index+1}.jpg')
         with open(img_filename, 'wb') as img_file:
             img_file.write(img_response.content)
-        print(f"Imagen guardada: {img_url_high_res}")
 
     except requests.RequestException as e:
         print(f"Error al descargar la imagen {img_url}: {e}")
